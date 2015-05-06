@@ -6,7 +6,7 @@
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('bg.jpg') no-repeat center center fixed;
+    background: url('stones.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -110,6 +110,10 @@ footer {
 footer p {
     margin: 0;
     padding: 50px 0;
+}
+
+.justify {
+  text-align:justify;
 }
 
 @media screen and (min-width:768px) {
