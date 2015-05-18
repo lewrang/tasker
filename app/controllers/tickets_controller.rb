@@ -15,16 +15,12 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
-    @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-    @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-    @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+    set_ticket_form_data
   end
 
   # GET /tickets/1/edit
   def edit
-    @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-    @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-    @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+    set_ticket_form_data
   end
 
   # POST /tickets
@@ -37,9 +33,7 @@ class TicketsController < ApplicationController
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
-        @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-        @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-        @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+        set_ticket_form_data
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
@@ -54,9 +48,7 @@ class TicketsController < ApplicationController
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
       else
-        @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-        @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-        @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+        set_ticket_form_data
         format.html { render :edit }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
@@ -82,5 +74,10 @@ class TicketsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
       params.require(:ticket).permit(:title, :description, :priority, :difficulty_level, :status)
+    end
+    def set_ticket_form_data
+      @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+      @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+      @status = [ [ "Open", 1 ], [ "Closed", 2 ], ["Canceled", 3] ]     
     end
 end

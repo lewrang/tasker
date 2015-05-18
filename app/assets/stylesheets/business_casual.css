@@ -133,6 +133,7 @@ th {
   text-align:center;
 }
 
+
 @media screen and (min-width:768px) {
     .brand {
         display: inherit;
@@ -209,5 +210,8 @@ th {
         content: '';
         display: table;
         clear: both;
+    }
+    .new-button {
+      padding-top: 37px;
     }
 }
