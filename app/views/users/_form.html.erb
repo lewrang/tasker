@@ -1,13 +1,13 @@
-<%= form_for @ticket, :html => { :class => "form-horizontal ticket" } do |f| %>
+<%= form_for @user, :html => { :class => "form-horizontal user" } do |f| %>
 
-    <% if @ticket.errors.any? %>
+    <% if @user.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h3>
+        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h3>
       </div>
       <div class="panel-body">
         <ul>
-        <% @ticket.errors.full_messages.each do |msg| %>
+        <% @user.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
         <% end %>
         </ul>
@@ -19,9 +19,9 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :title %>
-    <%= f.text_field :title, :class => 'form-control' %>
-    <%= error_span(@ticket[:title]) %>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name, :class => 'form-control' %>
+    <%= error_span(@user[:first_name]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>
@@ -29,9 +29,9 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :description %>
-    <%= f.text_area :description, :class => 'form-control' %>
-    <%= error_span(@ticket[:description]) %>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name, :class => 'form-control' %>
+    <%= error_span(@user[:last_name]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>
@@ -39,9 +39,9 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :priority %>
-    <%= f.select(:priority, @priority, {}, { :class => 'form-control' }) %>
-    <%= error_span(@ticket[:priority]) %>
+    <%= f.label :password %>
+    <%= f.text_field :password, :class => 'form-control' %>
+    <%= error_span(@user[:password]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>
@@ -49,22 +49,13 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :difficulty_level %>
-    <%= f.select( :difficulty_level, @level, {include_blank: "Select"}, { :class => 'form-control' } )%>
-    <%= error_span(@ticket[:difficulty_level]) %>
+    <%= f.label :password_confirmation  %>
+    <%= f.text_field :password_confirmation , :class => 'form-control' %>
+    <%= error_span(@user[:password_confirmation ]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>
-  <div class="clearfix"></div>
-  <div class="form-group col-lg-4"></div>
-  
-  <div class="form-group col-lg-4">
-    <%= f.label :status %>
-    <%= f.select(:status, @status, {include_blank: "Select"}, { :class => 'form-control' }  )%>
-    <%= error_span(@ticket[:status]) %>
-  </div>
-  
-  <div class="form-group col-lg-4"></div>  
+
   
 </div>
 

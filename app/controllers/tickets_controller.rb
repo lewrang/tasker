@@ -15,10 +15,16 @@ class TicketsController < ApplicationController
   # GET /tickets/new
   def new
     @ticket = Ticket.new
+    @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+    @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+    @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
   end
 
   # GET /tickets/1/edit
   def edit
+    @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+    @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+    @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
   end
 
   # POST /tickets
@@ -31,6 +37,9 @@ class TicketsController < ApplicationController
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render :show, status: :created, location: @ticket }
       else
+        @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+        @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+        @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
         format.html { render :new }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
@@ -45,6 +54,9 @@ class TicketsController < ApplicationController
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
       else
+        @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+        @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+        @status = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
         format.html { render :edit }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end

@@ -6,7 +6,7 @@
 
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    background: url('stones.jpg') no-repeat center center fixed;
+    background: url('stripes.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -23,6 +23,7 @@ h6 {
     font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     letter-spacing: 1px;
+    text-align:center;
 }
 
 p {
@@ -110,10 +111,26 @@ footer {
 footer p {
     margin: 0;
     padding: 50px 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.5em;
 }
 
 .justify {
   text-align:justify;
+}
+a.btn.btn-primary:visited{
+  color: white;
+}
+a.btn.btn-danger:visited{
+  color: white;
+}
+a.btn.btn-xs.btn-danger:visited{
+  color: white;
+}
+
+textarea { resize: vertical; }
+th {
+  text-align:center;
 }
 
 @media screen and (min-width:768px) {
