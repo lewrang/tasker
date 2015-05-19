@@ -3,7 +3,10 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
-
+html {
+  position: relative;
+  min-height: 100%;
+}
 body {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     background: url('stripes.jpg') no-repeat center center fixed;
@@ -11,6 +14,7 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    margin-bottom: 65px;
 }
 
 h1,
@@ -106,11 +110,14 @@ hr {
 footer {
     background: #fff;
     background: rgba(255,255,255,0.9);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer p {
     margin: 0;
-    padding: 50px 0;
+    padding: 20px 0;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.5em;
 }
@@ -135,25 +142,31 @@ th {
 
 #cookieWarnDiv{
   width: 100%;
-  min-height: 60px;
+  min-height: 75px;
   position: fixed;
   bottom: 0;
-  background: white;
+  background: black;
   z-index: 100;
-  opacity: 0.7;
+  opacity: 0.9;
   text-align: center;
   font-size: 25px;
   padding-top: 10px;
   display: none;
+  color: white;
+  
 }
 #cookieOkButton {
-  height: 30px;
+  height: 40px;
   margin: 0px 10px;
+  color: black;
 }
 
 .field_with_errors {
   padding: 2px;
   background-color: #FF8A80;
+}
+tbody {
+  cursor:pointer;
 }
 
 @media screen and (min-width:768px) {

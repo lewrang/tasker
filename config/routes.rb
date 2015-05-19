@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   
-  resources :users, only: [:index, :show, :new, :destroy]
+  resources :users, only: [:index, :new, :destroy]
   post 'users/new' => 'users#create', as: :create_new_user
   resource :user, only: [:edit] do
     collection do
