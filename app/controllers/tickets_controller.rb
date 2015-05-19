@@ -73,11 +73,13 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:title, :description, :priority, :difficulty_level, :status)
+      params.require(:ticket).permit(:title, :description, :priority, :difficulty_level, :status, :project_id, :user_id)
     end
     def set_ticket_form_data
-      @priority = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
+      @priority = [ [ 1, 1 ], [ 2, 2 ], [3, 3], [4, 4], [5, 5] ]
       @level = [ [ "Low", 1 ], [ "Medium", 2 ], ["High", 3] ]
-      @status = [ [ "Open", 1 ], [ "Closed", 2 ], ["Canceled", 3] ]     
+      @status = [ [ "Open", 1 ], [ "Closed", 2 ], ["Canceled", 3] ]
+      @projects = Project.all.collect {|p| [ p.name, p.id ] }
+      @users = User.all.collect {|u| [ u.email, u.id ] }
     end
 end

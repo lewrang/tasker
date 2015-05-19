@@ -69,11 +69,19 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :attachments, :class => 'control-label' %>
-    <div class="controls">
-      <%= file_field_tag "attachments[]", type: :file, multiple: true, :class => 'form-control'  %>
-    </div>
-    <%= error_span(@ticket[:attachments]) %>
+    <%= f.label :user %>
+    <%= f.select(:user_id, @users, {include_blank: "Select"}, { :class => 'form-control' }  )%>
+    <%= error_span(@ticket[:user]) %>
+  </div>
+  
+  <div class="form-group col-lg-4"></div>
+  <div class="clearfix"></div>
+  <div class="form-group col-lg-4"></div>
+  
+  <div class="form-group col-lg-4">
+    <%= f.label :project %>
+    <%= f.select(:project_id, @projects, { :class => 'form-control' }  )%>
+    <%= error_span(@ticket[:project]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>

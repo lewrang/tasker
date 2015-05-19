@@ -11,9 +11,37 @@
   <dt><strong><%= model_class.human_attribute_name(:priority) %>:</strong></dt>
   <dd><%= @ticket.priority %></dd>
   <dt><strong><%= model_class.human_attribute_name(:difficulty_level) %>:</strong></dt>
-  <dd><%= @ticket.difficulty_level %></dd>
+  <% if @ticket.difficulty_level.blank? %>
+    <dd>None</dd>
+  <% elsif @ticket.difficulty_level == 1 %>
+    <dd>Low</dd>
+  <% elsif @ticket.difficulty_level == 2 %>
+    <dd>Medium</dd>
+  <% elsif @ticket.difficulty_level == 3 %>
+    <dd>High</dd>
+  <% end %>
+  
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
-  <dd><%= @ticket.status %></dd>
+  <% if @ticket.status.blank? %>
+    <dd>None /dd>
+  <% elsif @ticket.status == 1 %>
+    <dd>Open</dd>
+  <% elsif @ticket.status == 2 %>
+    <dd>Closed</dd>
+  <% elsif @ticket.status == 3 %>
+    <dd>Cancelled</dd>
+  <% end %>
+  
+  <% unless @ticket.user.blank? %>
+  <dt><strong><%= model_class.human_attribute_name(:user) %>:</strong></dt>
+  <dd><%= @ticket.user.email %></dd>
+  <% end %>
+  
+  <% unless @ticket.project.blank? %>
+  <dt><strong><%= model_class.human_attribute_name(:project) %>:</strong></dt>
+  <dd><%= @ticket.project.name %></dd>
+  <% end %>
+  
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
