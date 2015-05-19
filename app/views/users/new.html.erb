@@ -1,4 +1,8 @@
-<%= form_for @user, :html => { :class => "form-horizontal user" } do |f| %>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1>NEW USER</h1>
+</div>
+    <%= form_for @user, :url => create_new_user_path(@user), :html => { :class => "form-horizontal user" } do |f| %>
 
     <% if @user.errors.any? %>
     <div id="error_expl" class="panel panel-danger">
@@ -39,8 +43,18 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
+    <%= f.label :email %>
+    <%= f.text_field :email, :class => 'form-control' %>
+    <%= error_span(@user[:email]) %>
+  </div>
+  
+  <div class="form-group col-lg-4"></div>
+  <div class="clearfix"></div>
+  <div class="form-group col-lg-4"></div>
+  
+  <div class="form-group col-lg-4">
     <%= f.label :password %>
-    <%= f.text_field :password, :class => 'form-control' %>
+    <%= f.password_field :password, :class => 'form-control' %>
     <%= error_span(@user[:password]) %>
   </div>
   
@@ -50,12 +64,12 @@
   
   <div class="form-group col-lg-4">
     <%= f.label :password_confirmation  %>
-    <%= f.text_field :password_confirmation , :class => 'form-control' %>
+    <%= f.password_field :password_confirmation , :class => 'form-control' %>
     <%= error_span(@user[:password_confirmation ]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>
-
+  <div class="clearfix"></div>
   
 </div>
 
@@ -65,7 +79,7 @@
   <div class="form-group col-lg-4">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                tickets_path, :class => 'btn btn-default' %>
+users_path, :class => 'btn btn-default' %>
   </div>
 
   <div class="form-group col-lg-4"></div>

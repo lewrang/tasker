@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :projects
   devise_for :users
   
+  
+  resources :users, only: [:index, :show, :new, :destroy]
+  post 'users/new' => 'users#create', as: :create_new_user
   resource :user, only: [:edit] do
     collection do
       patch 'update'

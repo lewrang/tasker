@@ -1,7 +1,28 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!
+  
+  def index
+    @users = User.all
+  end
+  
+  def show
 
+  end  
+  
+  def new
+    @user = User.new
+  end 
+  
+  def create
+    @user = User.new(new_user_params)
+
+      if @user.save
+        redirect_to users_path, notice: 'User was successfully created.'
+      else
+        render :new 
+      end
+  end
+  
   def edit
     @user = current_user
   end
@@ -15,7 +36,17 @@ class UsersController < ApplicationController
       render "edit"
     end
   end
-
+  
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+  
   private
 
   def user_params
@@ -25,5 +56,9 @@ class UsersController < ApplicationController
     end
     params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
   end
+  def new_user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+  end
+  
 
 end
