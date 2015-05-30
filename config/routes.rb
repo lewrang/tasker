@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :new, :destroy]
   post 'users/new' => 'users#create', as: :create_new_user
+  get 'user/:id' => 'users#show', as: :show_user
   resource :user, only: [:edit] do
     collection do
       patch 'update'

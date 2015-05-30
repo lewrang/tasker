@@ -1,15 +1,35 @@
 <%- model_class = Ticket -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  
+<div class="form-group col-lg-4">
+  <ul class="pager">
+      <li><%= link_to "Previous", @ticket.previous_ticket %></li>
+  </ul>
+</div>
+<div class="form-group col-lg-4">
+  <div class="page-header">
+    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  </div>
 </div>
 
+<div class="form-group col-lg-4">
+  <ul class="pager">
+    <li><%= link_to "Next", @ticket.next_ticket %></li>
+  </ul>
+</div>
+<div class="clearfix"></div>
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
   <dd><%= @ticket.title %></dd>
+  
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @ticket.description %></dd>
+  
+  <dt><strong><%= model_class.human_attribute_name(:project) %>:</strong></dt>
+  <dd><%= link_to @ticket.project.name, project_path(@ticket.project)%></dd>
+  
   <dt><strong><%= model_class.human_attribute_name(:priority) %>:</strong></dt>
   <dd><%= @ticket.priority %></dd>
+  
   <dt><strong><%= model_class.human_attribute_name(:difficulty_level) %>:</strong></dt>
   <% if @ticket.difficulty_level.blank? %>
     <dd>None</dd>
@@ -23,7 +43,7 @@
   
   <dt><strong><%= model_class.human_attribute_name(:status) %>:</strong></dt>
   <% if @ticket.status.blank? %>
-    <dd>None /dd>
+    <dd>None </dd>
   <% elsif @ticket.status == 1 %>
     <dd>Open</dd>
   <% elsif @ticket.status == 2 %>
@@ -37,19 +57,29 @@
   <dd><%= @ticket.user.email %></dd>
   <% end %>
   
-  <% unless @ticket.project.blank? %>
-  <dt><strong><%= model_class.human_attribute_name(:project) %>:</strong></dt>
-  <dd><%= @ticket.project.name %></dd>
-  <% end %>
-  
+  <% unless @ticket.file.blank? %>
+    <dt><strong><%= model_class.human_attribute_name(:file) %>:</strong></dt>
+    <% if @ticket.file.content_type.include? 'image' %>
+      <dd><%= @ticket.file_name %></dd>
+      <dd>
+          <%= link_to image_tag(@ticket.file.url(:medium)), @ticket.file.url, rel: "lightbox"%>
+      </dd>
+    <% elsif @ticket.file_name.blank? %>
+      <dd><%= link_to @ticket.file_file_name, @ticket.file.url %></dd>
+    <% else %>
+      <dd><%= link_to @ticket.file_name, @ticket.file.url %></dd>
+    <% end %> 
+  <% end %>  
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
               tickets_path, :class => 'btn btn-default'  %>
 <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_ticket_path(@ticket), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+<% if can? :destroy, @ticket %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               ticket_path(@ticket),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
+<% end %>

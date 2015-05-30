@@ -19,7 +19,7 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :name %>
+    <%= f.label :name, class: 'required' %>
     <%= f.text_field :name, :class => 'form-control' %>
     <%= error_span(@project[:name]) %>
   </div>

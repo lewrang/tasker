@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519131237) do
+ActiveRecord::Schema.define(version: 20150529162630) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -26,10 +26,16 @@ ActiveRecord::Schema.define(version: 20150519131237) do
     t.integer  "priority"
     t.integer  "difficulty_level"
     t.integer  "status"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "project_id"
     t.integer  "user_id"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.string   "file_name"
+    t.boolean  "proceed",           default: false
   end
 
   add_index "tickets", ["project_id"], name: "index_tickets_on_project_id"

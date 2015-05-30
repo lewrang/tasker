@@ -16,7 +16,11 @@ body {
     -o-background-size: cover;
     margin-bottom: 65px;
 }
-
+ 
+label.required:after {
+    content: " *";
+    color: red;
+}
 h1,
 h2,
 h3,
@@ -55,7 +59,7 @@ hr {
 .navbar-nav {
     text-transform: uppercase;
     font-weight: 400;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
 }
 
 .img-full {
@@ -168,7 +172,24 @@ th {
 tbody {
   cursor:pointer;
 }
+.unread_ticket {
+  color:red;
+}
 
+.unread_tickets a {
+  color: #777;
+  line-height: normal;
+}
+.unread_tickets a:hover {
+  color: #333;
+  text-decoration: none;
+}
+.unread_tickets{
+  display: block;
+  color:red;
+  text-align:center;
+  padding: 35px;
+}
 @media screen and (min-width:768px) {
     .brand {
         display: inherit;
@@ -236,7 +257,7 @@ tbody {
         float: none;
         margin: 0 auto;
         table-layout: fixed;
-        font-size: 1.25em;
+        font-size: 1.00em;
     }
 }
 
@@ -248,5 +269,12 @@ tbody {
     }
     .new-button {
       padding-top: 37px;
+    }
+}
+@media screen and (max-width:768px) {
+    .unread_tickets{
+      color: red;
+      text-align: center;
+      padding: 10px 15px;
     }
 }

@@ -19,7 +19,7 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :title %>
+    <%= f.label :title, class: 'required' %>
     <%= f.text_field :title, :class => 'form-control' %>
     <%= error_span(@ticket[:title]) %>
   </div>
@@ -29,9 +29,19 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :description %>
+    <%= f.label :description, class: 'required' %>
     <%= f.text_area :description, :class => 'form-control' %>
     <%= error_span(@ticket[:description]) %>
+  </div>
+  
+  <div class="form-group col-lg-4"></div>
+  <div class="clearfix"></div>
+    <div class="form-group col-lg-4"></div>
+  
+  <div class="form-group col-lg-4">
+    <%= f.label :project, class: 'required' %>
+    <%= f.select(:project_id, @projects,{} , { :class => 'form-control' }  )%>
+    <%= error_span(@ticket[:project]) %>
   </div>
   
   <div class="form-group col-lg-4"></div>
@@ -39,7 +49,7 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :priority %>
+    <%= f.label :priority, class: 'required' %>
     <%= f.select(:priority, @priority, {}, { :class => 'form-control' }) %>
     <%= error_span(@ticket[:priority]) %>
   </div>
@@ -79,15 +89,51 @@
   <div class="form-group col-lg-4"></div>
   
   <div class="form-group col-lg-4">
-    <%= f.label :project %>
-    <%= f.select(:project_id, @projects, { :class => 'form-control' }  )%>
-    <%= error_span(@ticket[:project]) %>
+    <%= f.label :file_name %>
+    <%= f.text_field :file_name, :class => 'form-control' %>
+    <%= error_span(@ticket[:file_name]) %>
   </div>
   
-  <div class="form-group col-lg-4"></div>
+  <div class="form-group col-lg-4">
+    <div class="form-group col-lg-4"></div>
+    <div class="form-group col-lg-4">
+    <% unless @ticket.file.blank? %>
+      <% if @ticket.file.content_type.include? 'image' %>
+        <div class="thumbnail">
+          <%= link_to image_tag(@ticket.file.url(:small)), @ticket.file.url , rel: "lightbox"%>
+        </div>
+      <% elsif @ticket.file_name.blank? %>
+        <%= link_to @ticket.file_file_name, @ticket.file.url %>
+      <% else %>
+        <%= link_to @ticket.file_name, @ticket.file.url %>
+      <% end %> 
+    <% end %>
+    </div>
+    <div class="form-group col-lg-4"></div>
+  </div>
+  
   <div class="clearfix"></div>
+  <div class="form-group col-lg-4"></div>
+  
+  <div class="form-group col-lg-4">
+    <%= f.label :file %>
+    <%= f.file_field :file, :class => 'form-control' %>
+    <%= error_span(@ticket[:file]) %>
+  </div>
+  
+  <div class="form-group col-lg-4">
+    <div class="form-group col-lg-4"></div>
+    <div class="form-group col-lg-4">
+      <% unless @ticket.file.blank? %>
+        <%= f.label :remove_file %>
+        <%=f.check_box :remove_file, :class => 'form-control'%>
+      <% end %>
+    </div>
+    <div class="form-group col-lg-4"></div>
+  </div>
+  <div class="clearfix"></div>
+  
 </div>
-
 
   <div class="form-group col-lg-4"></div>
 

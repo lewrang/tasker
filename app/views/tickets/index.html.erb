@@ -15,32 +15,34 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:priority) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @tickets.each do |ticket| %>
     <tr data-href=<%=ticket_path(ticket)%>>
-        <td><%= link_to ticket.id, ticket_path(ticket) %></td>
+        <td>
+          <% if ticket.proceed? == false && ticket.user_id == current_user.id%>
+            <div class="unread_ticket">NEW</div>
+          <% end %>
+      </td>
         <td><%= ticket.title %></td>
         <td><%= truncate(ticket.description, length: 30, separator: ' ') %></td>
-        <td><%= ticket.priority %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_ticket_path(ticket), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+          <% if can? :destroy, ticket %>
+            <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       ticket_path(ticket),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
-        </td>
+        <% end %>
+      </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-

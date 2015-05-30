@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   # GET /tickets
   # GET /tickets.json
@@ -10,6 +11,10 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
+    if current_user.id  == @ticket.user_id
+      @ticket.proceed = true
+      @ticket.save
+    end
   end
 
   # GET /tickets/new
@@ -48,6 +53,7 @@ class TicketsController < ApplicationController
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.json { render :show, status: :ok, location: @ticket }
       else
+        p @ticket.errors
         set_ticket_form_data
         format.html { render :edit }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
@@ -73,7 +79,7 @@ class TicketsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def ticket_params
-      params.require(:ticket).permit(:title, :description, :priority, :difficulty_level, :status, :project_id, :user_id)
+      params.require(:ticket).permit(:title, :description, :priority, :difficulty_level, :status, :project_id, :user_id, :proceed, :file, :file_name, :remove_file)
     end
     def set_ticket_form_data
       @priority = [ [ 1, 1 ], [ 2, 2 ], [3, 3], [4, 4], [5, 5] ]
