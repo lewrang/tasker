@@ -2,10 +2,8 @@ require "rails_helper"
 
 describe User  do
   it { should validate_presence_of(:email) }
-  it { should validate_presence_of(:admin) }
   
   before :each do
-#    @user = User.new(first_name: "Andy", last_name: "Lindeman")
     @user = create(:user)
   end
   

@@ -3,10 +3,10 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
 
   def previous_project
-    Ticket.where(["id < ?", id]).last
+    Project.where(["id < ?", id]).last
   end
 
   def next_project
-    Ticket.where(["id > ?", id]).first
+    Project.where(["id > ?", id]).first
   end
 end
