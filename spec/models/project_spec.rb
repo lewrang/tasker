@@ -2,6 +2,7 @@ require "rails_helper"
 
 describe Project  do
   it { should validate_presence_of(:name) }
+  it { should have_many(:tickets) } 
   
   before :each do
     @project1 = create(:project)

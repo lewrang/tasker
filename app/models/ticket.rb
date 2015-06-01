@@ -1,7 +1,7 @@
 class Ticket < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
-  validates :title, :description, :priority, presence: true
+  validates :title, :description, :priority, :project_id, presence: true
   attr_accessor :remove_file
 
   before_save :delete_file, if: ->{ remove_file == '1' && !file_updated_at_changed? }
